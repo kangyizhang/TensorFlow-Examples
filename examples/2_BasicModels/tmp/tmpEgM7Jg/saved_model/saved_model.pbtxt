@@ -1,0 +1,163 @@
+saved_model_schema_version: 1
+meta_graphs {
+  meta_info_def {
+    stripped_op_list {
+      op {
+        name: "MatMul"
+        input_arg {
+          name: "a"
+          type_attr: "T"
+        }
+        input_arg {
+          name: "b"
+          type_attr: "T"
+        }
+        output_arg {
+          name: "product"
+          type_attr: "T"
+        }
+        attr {
+          name: "transpose_a"
+          type: "bool"
+          default_value {
+            b: false
+          }
+        }
+        attr {
+          name: "transpose_b"
+          type: "bool"
+          default_value {
+            b: false
+          }
+        }
+        attr {
+          name: "T"
+          type: "type"
+          allowed_values {
+            list {
+              type: DT_BFLOAT16
+              type: DT_HALF
+              type: DT_FLOAT
+              type: DT_DOUBLE
+              type: DT_INT32
+              type: DT_COMPLEX64
+              type: DT_COMPLEX128
+            }
+          }
+        }
+      }
+      op {
+        name: "NoOp"
+      }
+      op {
+        name: "Placeholder"
+        output_arg {
+          name: "output"
+          type_attr: "dtype"
+        }
+        attr {
+          name: "dtype"
+          type: "type"
+        }
+        attr {
+          name: "shape"
+          type: "shape"
+          default_value {
+            shape {
+              unknown_rank: true
+            }
+          }
+        }
+      }
+    }
+    tags: "serve"
+    tensorflow_version: "1.12.0"
+    tensorflow_git_version: "v1.12.0-0-ga6d8ffae09"
+  }
+  graph_def {
+    node {
+      name: "init"
+      op: "NoOp"
+    }
+    node {
+      name: "Placeholder"
+      op: "Placeholder"
+      attr {
+        key: "_output_shapes"
+        value {
+          list {
+            shape {
+              dim {
+                size: 1024
+              }
+              dim {
+                size: 1024
+              }
+            }
+          }
+        }
+      }
+      attr {
+        key: "dtype"
+        value {
+          type: DT_FLOAT
+        }
+      }
+      attr {
+        key: "shape"
+        value {
+          shape {
+            dim {
+              size: 1024
+            }
+            dim {
+              size: 1024
+            }
+          }
+        }
+      }
+    }
+    node {
+      name: "MatMul"
+      op: "MatMul"
+      input: "Placeholder"
+      input: "Placeholder"
+      attr {
+        key: "T"
+        value {
+          type: DT_FLOAT
+        }
+      }
+      attr {
+        key: "_output_shapes"
+        value {
+          list {
+            shape {
+              dim {
+                size: 1024
+              }
+              dim {
+                size: 1024
+              }
+            }
+          }
+        }
+      }
+      attr {
+        key: "transpose_a"
+        value {
+          b: false
+        }
+      }
+      attr {
+        key: "transpose_b"
+        value {
+          b: false
+        }
+      }
+    }
+    versions {
+      producer: 27
+    }
+  }
+}

@@ -1,0 +1,968 @@
+saved_model_schema_version: 1
+meta_graphs {
+  meta_info_def {
+    stripped_op_list {
+      op {
+        name: "Const"
+        output_arg {
+          name: "output"
+          type_attr: "dtype"
+        }
+        attr {
+          name: "value"
+          type: "tensor"
+        }
+        attr {
+          name: "dtype"
+          type: "type"
+        }
+      }
+      op {
+        name: "FIFOQueueV2"
+        output_arg {
+          name: "handle"
+          type: DT_RESOURCE
+        }
+        attr {
+          name: "component_types"
+          type: "list(type)"
+          has_minimum: true
+          minimum: 1
+        }
+        attr {
+          name: "shapes"
+          type: "list(shape)"
+          default_value {
+            list {
+            }
+          }
+          has_minimum: true
+        }
+        attr {
+          name: "capacity"
+          type: "int"
+          default_value {
+            i: -1
+          }
+        }
+        attr {
+          name: "container"
+          type: "string"
+          default_value {
+            s: ""
+          }
+        }
+        attr {
+          name: "shared_name"
+          type: "string"
+          default_value {
+            s: ""
+          }
+        }
+        is_stateful: true
+      }
+      op {
+        name: "NoOp"
+      }
+      op {
+        name: "Placeholder"
+        output_arg {
+          name: "output"
+          type_attr: "dtype"
+        }
+        attr {
+          name: "dtype"
+          type: "type"
+        }
+        attr {
+          name: "shape"
+          type: "shape"
+          default_value {
+            shape {
+              unknown_rank: true
+            }
+          }
+        }
+      }
+      op {
+        name: "QueueDequeueUpToV2"
+        input_arg {
+          name: "handle"
+          type: DT_RESOURCE
+        }
+        input_arg {
+          name: "n"
+          type: DT_INT32
+        }
+        output_arg {
+          name: "components"
+          type_list_attr: "component_types"
+        }
+        attr {
+          name: "component_types"
+          type: "list(type)"
+          has_minimum: true
+          minimum: 1
+        }
+        attr {
+          name: "timeout_ms"
+          type: "int"
+          default_value {
+            i: -1
+          }
+        }
+        is_stateful: true
+      }
+      op {
+        name: "QueueEnqueueV2"
+        input_arg {
+          name: "handle"
+          type: DT_RESOURCE
+        }
+        input_arg {
+          name: "components"
+          type_list_attr: "Tcomponents"
+        }
+        attr {
+          name: "Tcomponents"
+          type: "list(type)"
+          has_minimum: true
+          minimum: 1
+        }
+        attr {
+          name: "timeout_ms"
+          type: "int"
+          default_value {
+            i: -1
+          }
+        }
+        is_stateful: true
+      }
+      op {
+        name: "StridedSlice"
+        input_arg {
+          name: "input"
+          type_attr: "T"
+        }
+        input_arg {
+          name: "begin"
+          type_attr: "Index"
+        }
+        input_arg {
+          name: "end"
+          type_attr: "Index"
+        }
+        input_arg {
+          name: "strides"
+          type_attr: "Index"
+        }
+        output_arg {
+          name: "output"
+          type_attr: "T"
+        }
+        attr {
+          name: "T"
+          type: "type"
+        }
+        attr {
+          name: "Index"
+          type: "type"
+          allowed_values {
+            list {
+              type: DT_INT32
+              type: DT_INT64
+            }
+          }
+        }
+        attr {
+          name: "begin_mask"
+          type: "int"
+          default_value {
+            i: 0
+          }
+        }
+        attr {
+          name: "end_mask"
+          type: "int"
+          default_value {
+            i: 0
+          }
+        }
+        attr {
+          name: "ellipsis_mask"
+          type: "int"
+          default_value {
+            i: 0
+          }
+        }
+        attr {
+          name: "new_axis_mask"
+          type: "int"
+          default_value {
+            i: 0
+          }
+        }
+        attr {
+          name: "shrink_axis_mask"
+          type: "int"
+          default_value {
+            i: 0
+          }
+        }
+      }
+    }
+    tags: "serve"
+    tensorflow_version: "1.12.0"
+    tensorflow_git_version: "v1.12.0-0-ga6d8ffae09"
+  }
+  graph_def {
+    node {
+      name: "init"
+      op: "NoOp"
+    }
+    node {
+      name: "v0"
+      op: "Placeholder"
+      attr {
+        key: "_output_shapes"
+        value {
+          list {
+            shape {
+              dim {
+                size: 3
+              }
+            }
+          }
+        }
+      }
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "shape"
+        value {
+          shape {
+            dim {
+              size: 3
+            }
+          }
+        }
+      }
+    }
+    node {
+      name: "Const"
+      op: "Const"
+      attr {
+        key: "_output_shapes"
+        value {
+          list {
+            shape {
+              dim {
+                size: 3
+              }
+            }
+          }
+        }
+      }
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+              dim {
+                size: 3
+              }
+            }
+            tensor_content: "\002\000\000\000\002\000\000\000\002\000\000\000"
+          }
+        }
+      }
+    }
+    node {
+      name: "Const_1"
+      op: "Const"
+      attr {
+        key: "_output_shapes"
+        value {
+          list {
+            shape {
+              dim {
+                size: 3
+              }
+            }
+          }
+        }
+      }
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+              dim {
+                size: 3
+              }
+            }
+            tensor_content: "\002\000\000\000\002\000\000\000\002\000\000\000"
+          }
+        }
+      }
+    }
+    node {
+      name: "Const_2"
+      op: "Const"
+      attr {
+        key: "_output_shapes"
+        value {
+          list {
+            shape {
+              dim {
+                size: 3
+              }
+            }
+          }
+        }
+      }
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+              dim {
+                size: 3
+              }
+            }
+            tensor_content: "\002\000\000\000\002\000\000\000\002\000\000\000"
+          }
+        }
+      }
+    }
+    node {
+      name: "fifo_queue"
+      op: "FIFOQueueV2"
+      attr {
+        key: "_output_shapes"
+        value {
+          list {
+            shape {
+            }
+          }
+        }
+      }
+      attr {
+        key: "capacity"
+        value {
+          i: 99
+        }
+      }
+      attr {
+        key: "component_types"
+        value {
+          list {
+            type: DT_INT32
+          }
+        }
+      }
+      attr {
+        key: "container"
+        value {
+          s: ""
+        }
+      }
+      attr {
+        key: "shapes"
+        value {
+          list {
+            shape {
+              dim {
+                size: 3
+              }
+            }
+          }
+        }
+      }
+      attr {
+        key: "shared_name"
+        value {
+          s: ""
+        }
+      }
+    }
+    node {
+      name: "fifo_queue_enqueue"
+      op: "QueueEnqueueV2"
+      input: "fifo_queue"
+      input: "v0"
+      attr {
+        key: "Tcomponents"
+        value {
+          list {
+            type: DT_INT32
+          }
+        }
+      }
+      attr {
+        key: "timeout_ms"
+        value {
+          i: -1
+        }
+      }
+    }
+    node {
+      name: "fifo_queue_DequeueUpTo/n"
+      op: "Const"
+      attr {
+        key: "_output_shapes"
+        value {
+          list {
+            shape {
+            }
+          }
+        }
+      }
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+            }
+            int_val: 1
+          }
+        }
+      }
+    }
+    node {
+      name: "fifo_queue_DequeueUpTo"
+      op: "QueueDequeueUpToV2"
+      input: "fifo_queue"
+      input: "fifo_queue_DequeueUpTo/n"
+      attr {
+        key: "_output_shapes"
+        value {
+          list {
+            shape {
+              dim {
+                size: -1
+              }
+              dim {
+                size: 3
+              }
+            }
+          }
+        }
+      }
+      attr {
+        key: "component_types"
+        value {
+          list {
+            type: DT_INT32
+          }
+        }
+      }
+      attr {
+        key: "timeout_ms"
+        value {
+          i: -1
+        }
+      }
+    }
+    node {
+      name: "strided_slice/stack"
+      op: "Const"
+      attr {
+        key: "_output_shapes"
+        value {
+          list {
+            shape {
+              dim {
+                size: 1
+              }
+            }
+          }
+        }
+      }
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+              dim {
+                size: 1
+              }
+            }
+            int_val: 0
+          }
+        }
+      }
+    }
+    node {
+      name: "strided_slice/stack_1"
+      op: "Const"
+      attr {
+        key: "_output_shapes"
+        value {
+          list {
+            shape {
+              dim {
+                size: 1
+              }
+            }
+          }
+        }
+      }
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+              dim {
+                size: 1
+              }
+            }
+            int_val: 1
+          }
+        }
+      }
+    }
+    node {
+      name: "strided_slice/stack_2"
+      op: "Const"
+      attr {
+        key: "_output_shapes"
+        value {
+          list {
+            shape {
+              dim {
+                size: 1
+              }
+            }
+          }
+        }
+      }
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+              dim {
+                size: 1
+              }
+            }
+            int_val: 1
+          }
+        }
+      }
+    }
+    node {
+      name: "strided_slice"
+      op: "StridedSlice"
+      input: "fifo_queue_DequeueUpTo"
+      input: "strided_slice/stack"
+      input: "strided_slice/stack_1"
+      input: "strided_slice/stack_2"
+      attr {
+        key: "Index"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "T"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "_output_shapes"
+        value {
+          list {
+            shape {
+              dim {
+                size: 3
+              }
+            }
+          }
+        }
+      }
+      attr {
+        key: "begin_mask"
+        value {
+          i: 0
+        }
+      }
+      attr {
+        key: "ellipsis_mask"
+        value {
+          i: 0
+        }
+      }
+      attr {
+        key: "end_mask"
+        value {
+          i: 0
+        }
+      }
+      attr {
+        key: "new_axis_mask"
+        value {
+          i: 0
+        }
+      }
+      attr {
+        key: "shrink_axis_mask"
+        value {
+          i: 1
+        }
+      }
+    }
+    node {
+      name: "fifo_queue_enqueue_1"
+      op: "QueueEnqueueV2"
+      input: "fifo_queue"
+      input: "strided_slice"
+      attr {
+        key: "Tcomponents"
+        value {
+          list {
+            type: DT_INT32
+          }
+        }
+      }
+      attr {
+        key: "timeout_ms"
+        value {
+          i: -1
+        }
+      }
+    }
+    node {
+      name: "fifo_queue_DequeueUpTo_1/n"
+      op: "Const"
+      attr {
+        key: "_output_shapes"
+        value {
+          list {
+            shape {
+            }
+          }
+        }
+      }
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+            }
+            int_val: 1
+          }
+        }
+      }
+    }
+    node {
+      name: "fifo_queue_DequeueUpTo_1"
+      op: "QueueDequeueUpToV2"
+      input: "fifo_queue"
+      input: "fifo_queue_DequeueUpTo_1/n"
+      attr {
+        key: "_output_shapes"
+        value {
+          list {
+            shape {
+              dim {
+                size: -1
+              }
+              dim {
+                size: 3
+              }
+            }
+          }
+        }
+      }
+      attr {
+        key: "component_types"
+        value {
+          list {
+            type: DT_INT32
+          }
+        }
+      }
+      attr {
+        key: "timeout_ms"
+        value {
+          i: -1
+        }
+      }
+    }
+    node {
+      name: "strided_slice_1/stack"
+      op: "Const"
+      attr {
+        key: "_output_shapes"
+        value {
+          list {
+            shape {
+              dim {
+                size: 1
+              }
+            }
+          }
+        }
+      }
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+              dim {
+                size: 1
+              }
+            }
+            int_val: 0
+          }
+        }
+      }
+    }
+    node {
+      name: "strided_slice_1/stack_1"
+      op: "Const"
+      attr {
+        key: "_output_shapes"
+        value {
+          list {
+            shape {
+              dim {
+                size: 1
+              }
+            }
+          }
+        }
+      }
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+              dim {
+                size: 1
+              }
+            }
+            int_val: 1
+          }
+        }
+      }
+    }
+    node {
+      name: "strided_slice_1/stack_2"
+      op: "Const"
+      attr {
+        key: "_output_shapes"
+        value {
+          list {
+            shape {
+              dim {
+                size: 1
+              }
+            }
+          }
+        }
+      }
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+              dim {
+                size: 1
+              }
+            }
+            int_val: 1
+          }
+        }
+      }
+    }
+    node {
+      name: "strided_slice_1"
+      op: "StridedSlice"
+      input: "fifo_queue_DequeueUpTo_1"
+      input: "strided_slice_1/stack"
+      input: "strided_slice_1/stack_1"
+      input: "strided_slice_1/stack_2"
+      attr {
+        key: "Index"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "T"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "_output_shapes"
+        value {
+          list {
+            shape {
+              dim {
+                size: 3
+              }
+            }
+          }
+        }
+      }
+      attr {
+        key: "begin_mask"
+        value {
+          i: 0
+        }
+      }
+      attr {
+        key: "ellipsis_mask"
+        value {
+          i: 0
+        }
+      }
+      attr {
+        key: "end_mask"
+        value {
+          i: 0
+        }
+      }
+      attr {
+        key: "new_axis_mask"
+        value {
+          i: 0
+        }
+      }
+      attr {
+        key: "shrink_axis_mask"
+        value {
+          i: 1
+        }
+      }
+    }
+    node {
+      name: "fifo_queue_enqueue_2"
+      op: "QueueEnqueueV2"
+      input: "fifo_queue"
+      input: "strided_slice_1"
+      attr {
+        key: "Tcomponents"
+        value {
+          list {
+            type: DT_INT32
+          }
+        }
+      }
+      attr {
+        key: "timeout_ms"
+        value {
+          i: -1
+        }
+      }
+    }
+    node {
+      name: "fifo_queue_enqueue_3"
+      op: "QueueEnqueueV2"
+      input: "fifo_queue"
+      input: "Const_2"
+      attr {
+        key: "Tcomponents"
+        value {
+          list {
+            type: DT_INT32
+          }
+        }
+      }
+      attr {
+        key: "timeout_ms"
+        value {
+          i: -1
+        }
+      }
+    }
+    versions {
+      producer: 27
+    }
+  }
+}
